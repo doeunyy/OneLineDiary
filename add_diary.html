@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <title>Write My Diary</title>
+        <link rel="stylesheet" href="add_diary_style.css">
+        
+        <script>
+            var diary = [];
+            var temp = localStorage.getItem("diary");
+            
+            function write_diary() {
+                // 다이어리 내용 채우기
+                    var date = new Date();
+                    d = date.toDateString();
+
+                    var form = document.getElementById("feelingform")
+                    f = form.elements.feelingCheck.value;
+                    g = document.getElementById("good").value;
+                    b = document.getElementById("bad").value;
+                    diary.push( { date:d, feeling:f, good:g, bad:b } )
+
+                    // 다이어리 save
+                    localStorage.setItem("diary", JSON.stringify(diary));
+
+                    // 다이어리 작성 완료 팝업창
+                    alert("다이어리 작성이 완료되었습니다!");
+
+                    // main 화면으로 이동
+                    document.location.href="diary.html";
+            }
+            
+            function add_diary() {
+                if(!temp) {
+                    write_diary();
+                } else {
+                    diary = JSON.parse(temp);
+                    
+                    write_diary();
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <h1>오늘 나의 하루는 어땠나요?</h1>
+        <div class="group">
+            <div class="menu" id="menu_date">Date</div>
+            <div class="write" id="write_date">  </div>
+            <script> 
+                var d = new Date();
+                document.getElementById("write_date").innerHTML = d.toDateString();
+            </script>
+            
+            <div class="menu" id="menu_feeling">Feeling</div>
+            <div class="write" id="write_feeling">
+                오늘 하루도 수고했어요. 오늘 당신의 기분은 어땠나요? <br><br>
+                <form id="feelingform">
+                    <input type="radio" name="feelingCheck" value="Happy" style="width:20px;"> Happy <br>
+                    <input type="radio" name="feelingCheck" value="Good" style="width:20px;"> Good <br>
+                    <input type="radio" name="feelingCheck" value="So so" style="width:20px;"> So so <br>
+                    <input type="radio" name="feelingCheck" value="Bad" style="width:20px;"> Bad <br>
+                    <input type="radio" name="feelingCheck" value="Angry" style="width:20px;"> Angry <br>
+                </form>
+            </div>
+            
+            <div class="menu" id="menu_good">Good</div>
+            <div class="write" id="write_good">
+                오늘 스스로를 칭찬하고 싶은 점은 무엇인가요?
+                <input id="good" style="width:800px; height: 40px;">
+            </div>
+            
+            <div class="menu" id="menu_bad">Bad</div>
+            <div class="write" id="write_bad">
+                오늘 반성해야 할 점은 무엇인가요? <br>
+                <input id="bad" style="width:800px; height: 40px;">
+            </div>
+        </div>
+        <button onclick="add_diary()" class="button" id="done_button">기록 완료</button>
+        <button onclick="location.href='diary.html'" class="button" id="back_button">취소</button>
+    </body>
+</html>

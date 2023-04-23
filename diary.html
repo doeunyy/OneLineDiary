@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <title>My Diary</title>
+        <link rel="stylesheet" href="diary_style.css">
+
+        <script>
+            var temp = localStorage.getItem("diary");
+            diary = JSON.parse(temp);
+            
+            function load_diary() {
+                var temp = localStorage.getItem("diary");
+                diary = JSON.parse(temp);
+                display_diary();
+            }
+            
+            function del_row() {
+                diary.pop();
+                display_diary();
+                
+                // 다이어리 save
+                localStorage.setItem("diary", JSON.stringify(diary));
+            }
+            
+            function display_diary() {
+                document.getElementById("diarylist").innerHTML = "<tr> <th>No</th> <th>Date</th> <th> Feeling </th> <th> Good </th> <th> Bad </th> </tr>";
+                
+                 for(var i = (diary.length - 1); i >= 0; i--) {
+                    document.getElementById("diarylist").insertAdjacentHTML('beforeend', "<tr> <td>" + (i+1) + "</td> <td>" + diary[i].date + "</td> <td>" + diary[i].feeling + "</td> <td>" + diary[i].good + "</td> <td>" + diary[i].bad + "</td> </tr>");
+                }
+                
+            }
+            
+            // 다이어리 필터
+            function diary_filter() {
+                var filter = document.getElementById("filter_input").value;
+                
+                document.getElementById("diarylist").innerHTML = "<tr> <th>No</th> <th>Date</th> <th> Feeling </th> <th> Good </th> <th> Bad </th> </tr>";
+                
+                for(var i = (diary.length - 1); i >= 0; i--) {
+                    var search = diary[i].date;
+                    if( search.includes(filter) ) {
+                        document.getElementById("diarylist").insertAdjacentHTML('beforeend', "<tr> <td>" + (i+1) + "</td> <td>" + diary[i].date + "</td> <td>" + diary[i].feeling + "</td> <td>" + diary[i].good + "</td> <td>" + diary[i].bad + "</td> </tr>");
+                    } 
+                }
+            }
+        </script>
+    </head>
+    
+    <body onload="load_diary()">
+        <h1> <span class="h1_title">하루 한 줄 기록하기</span> </h1>
+        
+        <div class="upper_button">
+            <input id="filter_input" style="width:150px;" placeholder="ex) Jun, Wed, 20...">
+            <button onclick="diary_filter()" class="button" id="filter_button">filter</button>
+            
+            <button onclick="location.href='add_diary.html'" class="button" id="wrt_button">기록하기</button>
+        </div>
+
+
+        <table id="diarylist">
+            <tr> <th>No</th> <th>Date</th> <th>Feeling</th> <th>Good</th> <th>Bad</th> </tr>
+        </table> <br>
+
+        <button onclick="del_row()" class="button" id="del_button">Del</button>
+    </body>
+</html>

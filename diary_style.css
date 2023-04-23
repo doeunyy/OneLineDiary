@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+
+html { height: 100% }
+
+body {
+    margin: 0; padding: 50px;
+    background-image: url(bg_img_main.jpeg);
+    background-size: cover;
+}
+
+h1 {
+    margin: 0; padding: 10px;
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 50px;
+}
+
+.h1_title {
+    background: linear-gradient(#fdfbfb, #ebedee);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#diarylist {
+    font-family: sans-serif;
+    border-collapse: collapse;
+    width: 1000px;
+}
+
+#diarylist td, #diarylist th {
+    border: 1px solid #bbb;
+    padding: 10px;
+    text-align: center;
+}
+
+#diarylist th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: rgba(194, 233, 251, 0.7);
+    color: dimgray;
+}
+
+#diarylist td {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.upper_button { margin: 10px 0px; }
+
+.button {
+    margin: 2px; padding: 2px 15px;
+    border: 2px solid #a1c4fd;
+    border-radius: 15px;
+    background-color: whitesmoke;
+    color: dimgray;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.button:hover {
+    background: linear-gradient(#c2e9fb, #a1c4fd);
+    cursor: pointer;
+}
+
+#wrt_button {
+    position: relative; 
+    left:  700px;
+    
+}
+
+#del_button {
+    position: relative; 
+    left:  940px;
+}
+
+#menu {display: grid; grid-template-columns: auto auto auto auto;}
+
+@media(min-width: 400px) {
+    #layout {display: grid; grid-template-columns: auto auto;}
+    #menu {display: block;}
+}
